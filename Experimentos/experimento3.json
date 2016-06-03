@@ -1,0 +1,69 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "tables": [{
+    "url": "http://example.org/experimento3.csv",
+	"dialect" : {
+	  "encoding": "utf-8",
+	  "lineTerminators": ["\r\n", "\n"],
+	  "quoteChar": "\"",
+	  "doubleQuote": true,
+	  "skipRows": 0,
+	  "commentPrefix": "#",
+	  "header": true,
+	  "headerRowCount": 1,
+	  "delimiter": ",",
+	  "skipColumns": 0,
+	  "skipBlankRows": false,
+	  "skipInitialSpace": false,
+	  "trim": false
+	}, 
+    "tableSchema": {
+      "columns": [{
+        "name": "colunadate",
+        "datatype": "date"
+      }, {
+        "name": "colunatime",
+        "datatype": "time"
+      }, {
+        "name": "colunadatetime",
+        "datatype": "datetime"
+      }, {
+        "name": "colunadatetimestamp",
+        "datatype": "datetimestamp"
+      }, {
+        "name": "colunaduration",
+        "datatype": "duration"
+      }, {
+        "name": "colunadaytimeduration",
+        "datatype": "daytimeduration"
+      }, {
+	    "name": "colunayearmonthduration",
+	    "datatype": "yearmonthduration"
+	  }],
+      "aboutUrl": "http://example.org/experimento3.csv{#coluna}",
+      "propertyUrl": "http://schema.org/{_name}",
+      "primaryKey": "coluna"
+    }
+  }, {
+    "url": "http://example.org/country_slice.csv",
+    "tableSchema": {
+      "columns": [{
+        "name": "countryRef",
+        "valueUrl": "http://example.org/countries.csv{#countryRef}"
+      }, {
+        "name": "year",
+        "datatype": "gYear"
+      }, {
+        "name": "population",
+        "datatype": "integer"
+      }],
+      "foreignKeys": [{
+        "columnReference": "countryRef",
+        "reference": {
+          "resource": "http://example.org/experimento3.csv",
+          "columnReference": "coluna"
+        }
+      }]
+    }
+  }]
+}

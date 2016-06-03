@@ -1,0 +1,75 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "tables": [{
+    "url": "http://example.org/experimento1.csv",
+	"dialect" : {
+	  "encoding": "utf-8",
+	  "lineTerminators": ["\r\n", "\n"],
+	  "quoteChar": "\"",
+	  "doubleQuote": true,
+	  "skipRows": 0,
+	  "commentPrefix": "#",
+	  "header": true,
+	  "headerRowCount": 1,
+	  "delimiter": ",",
+	  "skipColumns": 0,
+	  "skipBlankRows": false,
+	  "skipInitialSpace": false,
+	  "trim": false
+	}, 
+    "tableSchema": {
+      "columns": [{
+        "name": "colunaboolean",
+        "datatype": "boolean"
+      }, {
+        "name": "colunadecimal",
+        "datatype": "decimal"
+      }, {
+        "name": "colunadouble",
+        "datatype": "double"
+      }, {
+        "name": "colunainteger",
+        "datatype": "integer"
+      }, {
+        "name": "colunalong",
+        "datatype": "long"
+      }, {
+        "name": "colunaint",
+        "datatype": "int"
+      }, {
+        "name": "colunashort",
+        "datatype": "short"
+      }, {
+        "name": "colunabyte",
+        "datatype": "byte"
+      }, {
+        "name": "colunastring",
+        "datatype": "string"
+      }],
+      "aboutUrl": "http://example.org/experimento1.csv{#colunainteger}",
+      "propertyUrl": "http://schema.org/{_name}",
+      "primaryKey": "colunainteger"
+    }
+  }, {
+    "url": "http://example.org/country_slice.csv",
+    "tableSchema": {
+      "columns": [{
+        "name": "countryRef",
+        "valueUrl": "http://example.org/countries.csv{#countryRef}"
+      }, {
+        "name": "year",
+        "datatype": "gYear"
+      }, {
+        "name": "population",
+        "datatype": "integer"
+      }],
+      "foreignKeys": [{
+        "columnReference": "countryRef",
+        "reference": {
+          "resource": "http://example.org/colunainteger.csv",
+          "columnReference": "colunainteger"
+        }
+      }]
+    }
+  }]
+}
